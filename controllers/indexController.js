@@ -7,6 +7,7 @@ exports.getMessages = async (req, res) => {
 
   res.render("index", {
     messages: messages,
+    user: req.user,
   });
 };
 
@@ -23,4 +24,22 @@ exports.createUser = async (req, res, next) => {
     console.error(err);
     next(err);
   }
+};
+
+exports.logoutUser = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
+
+exports.renderAddMessage = (req, res) => {
+  if (!req.user) return res.redirect("/login");
+  else res.render("addMessage", { user: req.user });
+};
+
+exports.addMessage = (req, res) => {
+  if (!req.user) return res.redirect("/login");
 };
