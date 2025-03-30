@@ -8,7 +8,6 @@ const indexRoute = require("./routes/indexRoute");
 const LocalStrategy = require("passport-local").Strategy;
 const pool = require("./db/pool");
 
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
