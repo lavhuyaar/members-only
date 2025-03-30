@@ -200,7 +200,7 @@ exports.renderJoinPage = async (req, res) => {
 
   return res.render("memberJoin", {
     user: req.user,
-    status: "Join the Club by entering the secret the secret code below",
+    status: "Join the Club by entering the secret the secret code below (you might want to see the README file of this repo)",
   });
 };
 
