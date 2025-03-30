@@ -9,6 +9,7 @@
     <% if (locals.user) {%>
     <form action="/add-message" method="POST">
       <label> Title: <input type="text" name="title" id="title" /> </label>
+      <label> Title: <textarea name="message" id="message"></textarea></label>
       <button type="submit">Add message</button>
     </form>
     <% } else { %>

@@ -48,11 +48,41 @@ const getAllMessages = async () => {
 };
 
 //Signs-up a new user
-const createNewUser = async (first_name, last_name, username, password) => {
+const createNewUser = async (
+  first_name,
+  last_name,
+  username,
+  password,
+  is_admin
+) => {
   await pool.query(
-    "INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4)",
-    [first_name, last_name, username, password]
+    "INSERT INTO users (first_name, last_name, username, password, is_admin) VALUES ($1, $2, $3, $4, $5)",
+    [first_name, last_name, username, password, is_admin]
   );
 };
 
-module.exports = { getAllMessages, createNewUser };
+const addMessage = async (title, timestamp, message, added_by) => {
+  await pool.query(
+    "INSERT INTO messages (title, timestamp, message, added_by) VALUES ($1, $2, $3, $4)",
+    [title, timestamp, message, added_by]
+  );
+};
+
+const removeMessage = async (id) => {
+  await pool.query("DELETE FROM messages WHERE id = $1", [id]);
+};
+
+const addUserToClub = async (id, username) => {
+  await pool.query(
+    "UPDATE users SET is_member = 'true' WHERE id = $1 AND username = $2",
+    [id, username]
+  );
+};
+
+module.exports = {
+  getAllMessages,
+  createNewUser,
+  addMessage,
+  removeMessage,
+  addUserToClub,
+};

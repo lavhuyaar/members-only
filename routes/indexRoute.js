@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getMessages, createUser, logoutUser, renderAddMessage, addMessage } = require("../controllers/indexController");
+const { getMessages, createUser, logoutUser, renderAddMessage, addMessage, deleteMessage, renderJoinPage, joinMembership } = require("../controllers/indexController");
 const passport = require("passport");
 
 const indexRoute = Router();
@@ -18,5 +18,8 @@ indexRoute.post(
 indexRoute.get('/logout', logoutUser);
 indexRoute.get('/add-message', renderAddMessage);
 indexRoute.post('/add-message', addMessage);
+indexRoute.get('/:id/delete', deleteMessage);
+indexRoute.get('/member-join', renderJoinPage);
+indexRoute.post('/member-join', joinMembership);
 
 module.exports = indexRoute;

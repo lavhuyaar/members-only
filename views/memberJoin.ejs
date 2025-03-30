@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join as a member</title>
+  </head>
+  <body>
+    <% if(locals.status) {%>
+    <h2><%= status %></h2>
+    <% } %> <% if(!locals.user) { %>
+    <h4>Login before joining the club <a href="/login">Login</a></h4>
+    <% } %> <% if(locals.user && locals.user.is_member !== 'true' &&
+    locals.user.is_admin !== 'true') { %>
+    <form action="/member-join" method="POST">
+      <label>
+        <input type="text" name="clubSecret" id="clubSecret" required />
+      </label>
+      <button type="submit">Join the club</button>
+    </form>
+    <% } %>
+  </body>
+</html>
