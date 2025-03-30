@@ -6,7 +6,7 @@
   </head>
   <body>
     <% if (locals.user) {%>
-    <h1>WELCOME BACK <%= user.first_name %> <%= user.last_name %></h1>
+    <h1>Welcome <%= user.first_name %> <%= user.last_name %></h1>
     <a href="/logout">LOG OUT</a>
     <% } else { %>
     <h1>please log in</h1>
@@ -15,6 +15,7 @@
       <input id="username" name="username" placeholder="username" type="text" />
       <label for="password">Password</label>
       <input id="password" name="password" type="password" />
+      <%- include("partials/errors.ejs") %>
       <button type="submit">Log In</button>
     </form>
     <%}%>

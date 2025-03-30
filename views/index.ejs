@@ -1,37 +1,32 @@
 <html>
   <head>
-    <title>Hello</title>
+    <title>Home</title>
   </head>
   <body>
-    
     <a href="/sign-up">Sign Up</a>
 
     <% if (locals.user) {%>
-      <h1>WELCOME BACK <%= user.first_name %> <%= user.last_name %></h1>
-        <% if(user.is_member !== 'true' && user.is_admin !== 'true') { %>
-          <a href="/member-join">Join as a member</a>
-       <% } %>
-      <a href="/add-message">Create a message</a>
+    <h1>Welcome <%= user.first_name %> <%= user.last_name %></h1>
+    <% if(user.is_member !== 'true' && user.is_admin !== 'true') { %>
+    <a href="/member-join">Join as a member</a>
+    <% } %>
+    <a href="/add-message">Create a message</a>
     <a href="/logout">LOG OUT</a>
     <% } else { %>
-    <a href="/login">Login</a> <%}%>
-
-    <% if(locals.messages && locals.messages.length > 0) { %>
-        <% messages.forEach(function(message) { %>
-            <h3><%= message.title %></h3>
-            <p><%= message.message %></p>
-           <% if(locals.user && (locals.user.is_member === 'true' || locals.user.is_admin === 'true' )) { %>
-                <p><%= message.added_by %></p>
-                <p><%= message.timestamp %></p>
-           <% } else { %>
-            <p>User</p>
-          <% } %>
-          <% if(locals.user && locals.user.is_admin === 'true') { %>
-              <a href="<%= message.id %>/delete">Delete</a>
-         <% } %>
-        <% }) %>
-    <% } else {%>
-          <h4>No messages</h4>
+    <a href="/login">Login</a> <%}%> <% if(locals.messages &&
+    locals.messages.length > 0) { %> <% messages.forEach(function(message) { %>
+    <h3><%= message.title %></h3>
+    <p><%= message.message %></p>
+    <% if(locals.user && (locals.user.is_member === 'true' ||
+    locals.user.is_admin === 'true' )) { %>
+    <p><%= message.added_by %></p>
+    <p><%= message.timestamp %></p>
+    <% } else { %>
+    <p>User</p>
+    <% } %> <% if(locals.user && locals.user.is_admin === 'true') { %>
+    <a href="<%= message.id %>/delete">Delete</a>
+    <% } %> <% }) %> <% } else {%>
+    <h4>No messages</h4>
     <%} %>
   </body>
 </html>

@@ -8,8 +8,9 @@
   <body>
     <% if (locals.user) {%>
     <form action="/add-message" method="POST">
-      <label> Title: <input type="text" name="title" id="title" /> </label>
-      <label> Title: <textarea name="message" id="message"></textarea></label>
+      <label> Title: <input type="text" name="title" id="title" required/> </label>
+      <label> Title: <textarea name="message" id="message" required></textarea></label>
+      <%- include("partials/errors.ejs") %>
       <button type="submit">Add message</button>
     </form>
     <% } else { %>
