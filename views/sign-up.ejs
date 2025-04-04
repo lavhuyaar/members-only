@@ -1,54 +1,86 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <form action="/sign-up" method="POST">
-      <label for="first_name"
-        >First Name:
-        <input type="text" name="first_name" id="first_name" required />
-      </label>
-      <label for="last_name"
-        >Last Name:
-        <input type="text" name="last_name" id="last_name" required />
-      </label>
-      <label
-        >Username:
-        <input type="text" name="username" id="username" required />
-      </label>
-      <label
-        >Password:
-        <input type="password" name="password" id="password" required />
-      </label>
-      <label
-        >Confirm Password:
-        <input
-          type="password"
-          name="confirm_password"
-          id="confirm_password"
-          required
-        />
-      </label>
-      <label
-        >Do you want to be an admin?
-        <input
-          type="radio"
-          name="is_admin"
-          id="is_admin_true"
-          value="true"
-          required
-        />
-        <input
-          type="radio"
-          name="is_admin"
-          id="is_admin_false"
-          value="false"
-          required
-        />
-      </label>
+    <%- include("partials/navbar.ejs") %>
+    <main class="sign-up-container">
+      <h1>Sign Up</h1>
+      <form action="/sign-up" method="POST">
+        <label
+          >First Name:
+          <input
+            type="text"
+            name="first_name"
+            id="first_name"
+            placeholder="John"
+          />
+        </label>
+        <label
+          >Last Name:
+          <input
+            type="text"
+            name="last_name"
+            id="last_name"
+            placeholder="Doe"
+          />
+        </label>
+        <label
+          >Username:
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="johndoe123"
+          />
+        </label>
+        <label
+          >Password:
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="123456"
+          />
+        </label>
+        <label
+          >Confirm Password:
+          <input
+            type="password"
+            name="confirm_password"
+            id="confirm_password"
+            placeholder="Enter same password"
+          />
+        </label>
+        <label
+          >Do you want to be an admin?
+          <input type="radio" name="is_admin" id="is_admin_true" value="true" />
+          <input
+            type="radio"
+            name="is_admin"
+            id="is_admin_false"
+            value="false"
+          />
+        </label>
+        <%- include("partials/errors.ejs") %>
+        <button class="sign-up-btn" type="submit">Sign up</button>
+      </form>
+    </main>
 
-      <button type="submit">Sign up</button>
-      <%- include("partials/errors.ejs") %>
-    </form>
+    <%- include("partials/footer.ejs") %>
+
+    <script>
+      const hamburger = document.body.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        const navbar = document.body.querySelector("nav");
+        navbar.style.display =
+          navbar.style.display === "flex" ? "none" : "flex";
+      });
+    </script>
   </body>
 </html>

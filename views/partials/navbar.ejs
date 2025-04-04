@@ -1,0 +1,16 @@
+<header>
+  <h1><a href="/">ECHO</a></h1>
+  <nav>
+    <% if (locals.user) {%> <% if(user.is_member !== 'true' && user.is_admin !==
+    'true') { %>
+    <button><a href="/member-join">Join as a member</a></button>
+    <% } %> <% } %>
+    <button><a href="/sign-up">Sign Up</a></button>
+    <% if(!locals.user) { %>
+    <button><a href="/login">Login</a></button>
+    <% } else { %>
+    <button><a href="/logout">Log out</a></button>
+    <% } %>
+  </nav>
+  <button class="hamburger"><span></span><span></span><span></span></button>
+</header>

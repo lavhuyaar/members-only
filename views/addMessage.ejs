@@ -3,17 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Add new message</title>
   </head>
   <body>
-    <% if (locals.user) {%>
-    <form action="/add-message" method="POST">
-      <label> Title: <input type="text" name="title" id="title" required/> </label>
-      <label> Title: <textarea name="message" id="message" required></textarea></label>
-      <%- include("partials/errors.ejs") %>
-      <button type="submit">Add message</button>
-    </form>
-    <% } else { %>
-    <a href="/login">Login</a> <%}%>
+    <%- include("partials/navbar.ejs") %>
+    <main class="add-message-container">
+      <% if (locals.user) {%>
+      <form action="/add-message" method="POST">
+        <label>
+          Title: <input type="text" name="title" id="title" required />
+        </label>
+        <label>
+          Message: <input name="message" id="message" required></input>
+        </label>
+        <%- include("partials/errors.ejs") %>
+        <button class="add-message-btn" type="submit">Add message</button>
+      </form>
+      <% } else { %>
+      <a href="/login">Login</a> <%}%>
+    </main>
+
+     <%- include("partials/footer.ejs") %>
+
+    <script>
+      const hamburger = document.body.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        const navbar = document.body.querySelector("nav");
+        navbar.style.display =
+        navbar.style.display === "flex" ? "none" : "flex";
+      });
+    </script>
   </body>
 </html>

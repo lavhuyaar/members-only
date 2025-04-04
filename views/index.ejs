@@ -1,32 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <a href="/sign-up">Sign Up</a>
+    <%- include("partials/navbar.ejs") %>
 
-    <% if (locals.user) {%>
-    <h1>Welcome <%= user.first_name %> <%= user.last_name %></h1>
-    <% if(user.is_member !== 'true' && user.is_admin !== 'true') { %>
-    <a href="/member-join">Join as a member</a>
-    <% } %>
-    <a href="/add-message">Create a message</a>
-    <a href="/logout">LOG OUT</a>
-    <% } else { %>
-    <a href="/login">Login</a> <%}%> <% if(locals.messages &&
-    locals.messages.length > 0) { %> <% messages.forEach(function(message) { %>
-    <h3><%= message.title %></h3>
-    <p><%= message.message %></p>
-    <% if(locals.user && (locals.user.is_member === 'true' ||
-    locals.user.is_admin === 'true' )) { %>
-    <p><%= message.added_by %></p>
-    <p><%= message.timestamp %></p>
-    <% } else { %>
-    <p>User</p>
-    <% } %> <% if(locals.user && locals.user.is_admin === 'true') { %>
-    <a href="<%= message.id %>/delete">Delete</a>
-    <% } %> <% }) %> <% } else {%>
-    <h4>No messages</h4>
-    <%} %>
+    <main class="index-container">
+      <% if(locals.messages && locals.messages.length > 0) { %>
+      <h1>All messages</h1>
+      <% messages.forEach(function(message) { %>
+      <div class="home-message">
+        <h3><%= message.title %></h3>
+        <p><%= message.message %></p>
+        <div class="home-message-details">
+          <% if(locals.user && (locals.user.is_member === 'true' ||
+          locals.user.is_admin === 'true' )) { %>
+          <p>by <%= message.added_by %></p>
+          <p><%= message.timestamp %></p>
+          <% } else { %>
+          <p>by User</p>
+          <% } %> <% if(locals.user && locals.user.is_admin === 'true') { %>
+          <button><a href="<%= message.id %>/delete">Delete</a></button>
+          <% } %>
+        </div>
+      </div>
+
+      <% }) %> <% } else {%>
+      <h4>No messages</h4>
+      <%} %> <% if(locals.user) { %>
+      <button class="add-message-btn">
+        <a href="/add-message">Add message</a>
+      </button>
+      <% } %>
+    </main>
+
+    <%- include("partials/footer.ejs") %>
+
+    <script>
+      const hamburger = document.body.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        const navbar = document.body.querySelector("nav");
+        navbar.style.display =
+          navbar.style.display === "flex" ? "none" : "flex";
+      });
+    </script>
   </body>
 </html>

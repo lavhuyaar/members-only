@@ -105,7 +105,7 @@ exports.renderAddMessage = (req, res) => {
 };
 
 //Renders sign up page
-exports.renderSignUp = (req, res) => res.render("sign-up");
+exports.renderSignUp = (req, res) => res.render("sign-up", { user: req.user });
 
 //Renders login page
 exports.renderLoginPage = (req, res) => {
@@ -200,7 +200,8 @@ exports.renderJoinPage = async (req, res) => {
 
   return res.render("memberJoin", {
     user: req.user,
-    status: "Join the Club by entering the secret the secret code below (you might want to see the README file of this repo)",
+    status:
+      "Join the Club by entering the secret code below (you might want to see the README file of this repo)",
   });
 };
 
@@ -215,9 +216,11 @@ exports.joinMembership = async (req, res) => {
     return res.status(404).redirect("/");
   }
   if (req.body.clubSecret !== process.env.CLUB_SECRET_KEY)
-    return res
-      .status(404)
-      .render("memberJoin", { errors: [{ msg: "Incorrect Secret Key" }] });
+    return res.status(404).render("memberJoin", {
+      status:
+        "Incorrect code (you might want to see the README file of this repo)",
+      user: req.user,
+    });
 
   await db.addUserToClub(req.user.id, req.user.username);
   res.render("/member-join", { user: req.user, status: "Welcome to the club" });

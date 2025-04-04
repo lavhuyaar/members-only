@@ -2,22 +2,52 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Log In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <% if (locals.user) {%>
-    <h1>Welcome <%= user.first_name %> <%= user.last_name %></h1>
-    <a href="/logout">LOG OUT</a>
-    <% } else { %>
-    <h1>please log in</h1>
-    <form action="/login" method="POST">
-      <label for="username">Username</label>
-      <input id="username" name="username" placeholder="username" type="text" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <%- include("partials/errors.ejs") %>
-      <button type="submit">Log In</button>
-    </form>
-    <%}%>
+    <%- include("partials/navbar.ejs") %>
+    <main class="login-container">
+      <% if (locals.user) {%>
+      <h1>Welcome <%= user.first_name %> <%= user.last_name %></h1>
+      <button class="logout-btn"><a href="/logout">Log out</a></button>
+      <% } else { %>
+      <h1>Login as a User/Admin</h1>
+      <form action="/login" method="POST">
+        <label
+          >Username:
+          <input
+            id="username"
+            name="username"
+            placeholder="johndoe123"
+            type="text"
+          />
+        </label>
+
+        <label
+          >Password:
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="123456"
+        /></label>
+
+        <%- include("partials/errors.ejs") %>
+        <button class="login-btn" type="submit">Log In</button>
+      </form>
+    </main>
+    <%}%> <%- include("partials/footer.ejs") %>
+
+    <script>
+      const hamburger = document.body.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        const navbar = document.body.querySelector("nav");
+        navbar.style.display =
+          navbar.style.display === "flex" ? "none" : "flex";
+      });
+    </script>
   </body>
 </html>
